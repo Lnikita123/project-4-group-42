@@ -47,20 +47,19 @@ const shortUrl = async function(req , res){
 }
 
 
+
 const getUrl = async function(req, res){
-  try {
-    const urlCode = req.params.urlCode
-    let getUrl = await urlModel.findOne({urlCode:urlCode})
+    try{
+    let data = req.params.urlCode;
+    let geturl = await urlModel.findOne({urlCode: data})
     if (!getUrl) {
-        return res.status(404).send({status:false,msg:"url not found"})
-    }
-    let url = getUrl.shortUrl
-    res.redirect(url)
+     return res.status(404).send({status:false,msg:"url not found"})
+ }
+    res.status(302).send({status: true, data: geturl.longUrl})
 
-  } catch (  err) {
-      return res.status(500).send({error:err.message})
-  }
-
+}catch (  err) {
+    return res.status(500).send({error:err.message})
+}
 }
 
 module.exports = {shortUrl,getUrl}
