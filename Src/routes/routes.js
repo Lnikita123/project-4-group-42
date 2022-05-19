@@ -3,7 +3,7 @@ const urlController = require('../controller/urlController')
 const router= express.Router()
 
 
-router.post('/url/shorten', urlController.shortUrl)
+router.post('/url/shorten', urlController.shortenUrl)
 
 router.get("/:urlCode", urlController .getUrl)
 module.exports=router
